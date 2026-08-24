@@ -1,0 +1,504 @@
+
+-- made by ronnyfce7 for brickheck
+
+local player = game:GetService("Players").LocalPlayer
+local camera = workspace.CurrentCamera
+local runService = game:GetService("RunService")
+local userInput = game:GetService("UserInputService")
+
+-- ============ GUI CREATION ============
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SkidHubGUI"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 450, 0, 370)
+frame.Position = UDim2.new(0.5, -225, 0.5, -185)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.3
+frame.BorderSizePixel = 0
+frame.ClipsDescendants = true
+frame.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = frame
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(255, 200, 50)
+stroke.Thickness = 2
+stroke.Transparency = 0.3
+stroke.Parent = frame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 35)
+title.Position = UDim2.new(0, 0, 0, 5)
+title.BackgroundTransparency = 1
+title.Text = "brick heck pickaspoits skid hub fe bypass 😈😈"
+title.TextColor3 = Color3.fromRGB(255, 200, 50)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.TextTransparency = 0.1
+title.Parent = frame
+
+-- Subtitle
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(1, 0, 0, 25)
+subtitle.Position = UDim2.new(0, 0, 0, 40)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "fe bypass is inject automatically 😈 sigma"
+subtitle.TextColor3 = Color3.fromRGB(0, 255, 200)
+subtitle.TextScaled = true
+subtitle.Font = Enum.Font.GothamBold
+subtitle.TextTransparency = 0.15
+subtitle.Parent = frame
+
+runService.RenderStepped:Connect(function()
+    local pulse = math.sin(tick() * 2) * 0.05 + 0.15
+    subtitle.TextTransparency = pulse
+end)
+
+-- ============ BUTTONS ============
+-- ROW 1: LEFT – WALLHACK
+local espButton = Instance.new("TextButton")
+espButton.Size = UDim2.new(0.42, 0, 0, 40)
+espButton.Position = UDim2.new(0.05, 0, 0.55, 0)
+espButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+espButton.BackgroundTransparency = 0.4
+espButton.Text = "brickheck WALLHACK"
+espButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+espButton.TextScaled = true
+espButton.Font = Enum.Font.GothamBold
+espButton.Parent = frame
+Instance.new("UICorner").CornerRadius = UDim.new(0, 8)
+espButton:FindFirstChild("UICorner").Parent = espButton
+
+-- ROW 1: RIGHT – ronny's aim
+local aimButton = Instance.new("TextButton")
+aimButton.Size = UDim2.new(0.42, 0, 0, 40)
+aimButton.Position = UDim2.new(0.53, 0, 0.55, 0)
+aimButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+aimButton.BackgroundTransparency = 0.4
+aimButton.Text = "ronny's aim"
+aimButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+aimButton.TextScaled = true
+aimButton.Font = Enum.Font.GothamBold
+aimButton.Parent = frame
+Instance.new("UICorner").CornerRadius = UDim.new(0, 8)
+aimButton:FindFirstChild("UICorner").Parent = aimButton
+
+-- ROW 2: LEFT – FE Fly
+local flyButton = Instance.new("TextButton")
+flyButton.Size = UDim2.new(0.42, 0, 0, 40)
+flyButton.Position = UDim2.new(0.05, 0, 0.73, 0)
+flyButton.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
+flyButton.BackgroundTransparency = 0.5
+flyButton.Text = "FE Fly Toggle"
+flyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+flyButton.TextScaled = true
+flyButton.Font = Enum.Font.GothamBold
+flyButton.Parent = frame
+Instance.new("UICorner").CornerRadius = UDim.new(0, 8)
+flyButton:FindFirstChild("UICorner").Parent = flyButton
+
+-- ROW 2: RIGHT – SpeedyMode
+local speedButton = Instance.new("TextButton")
+speedButton.Size = UDim2.new(0.42, 0, 0, 40)
+speedButton.Position = UDim2.new(0.53, 0, 0.73, 0)
+speedButton.BackgroundColor3 = Color3.fromRGB(200, 100, 255)
+speedButton.BackgroundTransparency = 0.4
+speedButton.Text = "SpeedyMode"
+speedButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+speedButton.TextScaled = true
+speedButton.Font = Enum.Font.GothamBold
+speedButton.Parent = frame
+Instance.new("UICorner").CornerRadius = UDim.new(0, 8)
+speedButton:FindFirstChild("UICorner").Parent = speedButton
+
+-- ROW 3: BIG – spinny heck mode
+local spinButton = Instance.new("TextButton")
+spinButton.Size = UDim2.new(0.9, 0, 0, 55)
+spinButton.Position = UDim2.new(0.05, 0, 0.88, 0)
+spinButton.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
+spinButton.BackgroundTransparency = 0.3
+spinButton.Text = "spinny heck mode"
+spinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+spinButton.TextScaled = true
+spinButton.Font = Enum.Font.GothamBold
+spinButton.Parent = frame
+Instance.new("UICorner").CornerRadius = UDim.new(0, 10)
+spinButton:FindFirstChild("UICorner").Parent = spinButton
+
+-- Hover effects
+local function addHover(btn, onColor, offColor)
+    btn.MouseEnter:Connect(function() btn.BackgroundTransparency = onColor end)
+    btn.MouseLeave:Connect(function() btn.BackgroundTransparency = offColor end)
+end
+
+addHover(espButton, 0.2, 0.4)
+addHover(aimButton, 0.2, 0.4)
+addHover(flyButton, 0.3, 0.5)
+addHover(speedButton, 0.2, 0.4)
+addHover(spinButton, 0.1, 0.3)
+
+-- ============ DRAGGABLE GUI ============
+local dragging = false
+local dragStart, startPos = nil, nil
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+    end
+end)
+
+frame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+userInput.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+-- =====================================================
+-- ============ FEATURE: ESP (WALLHACK) ================
+-- =====================================================
+local espEnabled = false
+local espObjects = {}
+local espConnections = {}
+
+local function createESP(playerObj)
+    if playerObj == player then return end
+    local char = playerObj.Character
+    if not char then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    local head = char:FindFirstChild("Head")
+    if not root or not head then return end
+    
+    local box = Drawing.new("Box")
+    box.Thickness = 2
+    box.Transparency = 0.7
+    box.Filled = false
+    box.Color = Color3.fromRGB(255, 0, 0)
+    
+    local nameTag = Drawing.new("Text")
+    nameTag.Size = 14
+    nameTag.Center = true
+    nameTag.Outline = true
+    nameTag.OutlineColor = Color3.new(0, 0, 0)
+    nameTag.Color = Color3.fromRGB(255, 255, 255)
+    nameTag.Text = playerObj.Name
+    
+    local healthTag = Drawing.new("Text")
+    healthTag.Size = 12
+    healthTag.Center = true
+    healthTag.Outline = true
+    healthTag.OutlineColor = Color3.new(0, 0, 0)
+    
+    espObjects[playerObj] = {box = box, nameTag = nameTag, healthTag = healthTag, root = root, head = head, char = char}
+end
+
+local function updateESP()
+    for playerObj, data in pairs(espObjects) do
+        if not playerObj or not playerObj.Character then
+            data.box.Visible = false
+            data.nameTag.Visible = false
+            data.healthTag.Visible = false
+            continue
+        end
+        
+        local rootPos = data.root.Position
+        local headPos = data.head.Position
+        local rootScreen, headScreen = camera:WorldToViewportPoint(rootPos), camera:WorldToViewportPoint(headPos)
+        
+        if rootScreen.Z <= 0 or headScreen.Z <= 0 then
+            data.box.Visible = false
+            data.nameTag.Visible = false
+            data.healthTag.Visible = false
+            continue
+        end
+        
+        local height = math.abs(rootScreen.Y - headScreen.Y) * 1.8
+        local width = height * 0.5
+        local x = rootScreen.X - width / 2
+        local y = headScreen.Y - height * 0.3
+        
+        data.box.Visible = true
+        data.box.Size = Vector2.new(width, height)
+        data.box.Position = Vector2.new(x, y)
+        
+        data.nameTag.Visible = true
+        data.nameTag.Position = Vector2.new(rootScreen.X, headScreen.Y - height * 0.4)
+        
+        local health = data.char:FindFirstChild("Humanoid") and data.char.Humanoid.Health or 100
+        data.healthTag.Visible = true
+        data.healthTag.Text = math.round(health) .. "%"
+        data.healthTag.Color = health > 50 and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+        data.healthTag.Position = Vector2.new(rootScreen.X, headScreen.Y + height * 0.1)
+    end
+end
+
+local function clearESP()
+    for _, data in pairs(espObjects) do
+        data.box:Remove()
+        data.nameTag:Remove()
+        data.healthTag:Remove()
+    end
+    espObjects = {}
+    for _, conn in pairs(espConnections) do
+        conn:Disconnect()
+    end
+    espConnections = {}
+end
+
+local function toggleESP()
+    espEnabled = not espEnabled
+    if espEnabled then
+        espButton.Text = "✅ WALLHACK"
+        espButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+        for _, p in pairs(player:GetPlayers()) do
+            createESP(p)
+        end
+        espConnections[#espConnections+1] = player.PlayerAdded:Connect(createESP)
+        espConnections[#espConnections+1] = player.PlayerRemoving:Connect(function(p) 
+            if espObjects[p] then
+                espObjects[p].box:Remove()
+                espObjects[p].nameTag:Remove()
+                espObjects[p].healthTag:Remove()
+                espObjects[p] = nil
+            end
+        end)
+        espConnections[#espConnections+1] = runService.RenderStepped:Connect(function()
+            if espEnabled then updateESP() end
+        end)
+    else
+        espButton.Text = "brickheck WALLHACK"
+        espButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        clearESP()
+    end
+end
+
+espButton.MouseButton1Click:Connect(toggleESP)
+
+-- =====================================================
+-- ============ FEATURE: AIMBOT =======================
+-- =====================================================
+local aimEnabled = false
+local aimConnection = nil
+
+local function getClosestPlayer()
+    local closest, closestDist = nil, math.huge
+    local mousePos = userInput:GetMouseLocation()
+    
+    for _, p in pairs(player:GetPlayers()) do
+        if p ~= player and p.Character and p.Character:FindFirstChild("Head") then
+            local headPos, onScreen = camera:WorldToViewportPoint(p.Character.Head.Position)
+            if onScreen then
+                local dist = (Vector2.new(headPos.X, headPos.Y) - mousePos).Magnitude
+                if dist < closestDist and dist < 500 then
+                    closest = p
+                    closestDist = dist
+                end
+            end
+        end
+    end
+    return closest
+end
+
+local function aimbotLoop()
+    if not aimEnabled then return end
+    local target = getClosestPlayer()
+    if target and target.Character and target.Character:FindFirstChild("Head") then
+        local headPos = target.Character.Head.Position
+        local currentCF = camera.CFrame
+        local targetCF = CFrame.new(currentCF.Position, headPos)
+        camera.CFrame = camera.CFrame:Lerp(targetCF, 0.3)
+    end
+end
+
+local function toggleAimbot()
+    aimEnabled = not aimEnabled
+    if aimEnabled then
+        aimButton.Text = "✅ ronny's aim"
+        aimButton.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+        if aimConnection then aimConnection:Disconnect() end
+        aimConnection = runService.RenderStepped:Connect(function()
+            if aimEnabled then aimbotLoop() end
+        end)
+    else
+        aimButton.Text = "ronny's aim"
+        aimButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+        if aimConnection then 
+            aimConnection:Disconnect()
+            aimConnection = nil
+        end
+    end
+end
+
+aimButton.MouseButton1Click:Connect(toggleAimbot)
+
+-- =====================================================
+-- ============ FEATURE: FLY ==========================
+-- =====================================================
+local flying = false
+local flyBodyVel = nil
+local flySpeed = 20
+
+local function startFly()
+    local char = player.Character
+    if not char then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    local humanoid = char:FindFirstChild("Humanoid")
+    if not root or not humanoid then return end
+    
+    flying = true
+    humanoid.PlatformStand = true
+    
+    flyBodyVel = Instance.new("BodyVelocity")
+    flyBodyVel.MaxForce = Vector3.new(1e9, 1e9, 1e9)
+    flyBodyVel.Velocity = Vector3.new(0, 0, 0)
+    flyBodyVel.Parent = root
+end
+
+local function stopFly()
+    flying = false
+    if flyBodyVel then
+        flyBodyVel:Destroy()
+        flyBodyVel = nil
+    end
+    local char = player.Character
+    if char and char:FindFirstChild("Humanoid") then
+        char.Humanoid.PlatformStand = false
+    end
+end
+
+local function updateFly()
+    if not flying or not flyBodyVel then return end
+    local char = player.Character
+    if not char then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+    
+    local lookVector = camera.CFrame.LookVector
+    local direction = Vector3.new(lookVector.X, 0, lookVector.Z).Unit
+    local vertical = Vector3.new(0, 0.25, 0)
+    local finalDir = (direction + vertical).Unit
+    
+    flyBodyVel.Velocity = finalDir * flySpeed
+end
+
+local function toggleFly()
+    if flying then
+        stopFly()
+        flyButton.Text = "FE Fly Toggle"
+        flyButton.BackgroundColor3 = Color3.fromRGB(255, 200, 50)
+    else
+        startFly()
+        flyButton.Text = "🛩️ FE Fly ON"
+        flyButton.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+    end
+end
+
+flyButton.MouseButton1Click:Connect(toggleFly)
+
+runService.RenderStepped:Connect(function()
+    if flying then updateFly() end
+end)
+
+player.CharacterAdded:Connect(function()
+    if flying then stopFly() end
+end)
+
+-- =====================================================
+-- ============ FEATURE: SPEEDY MODE ==================
+-- =====================================================
+local speedEnabled = false
+local originalWalkSpeed = 16
+
+local function toggleSpeed()
+    speedEnabled = not speedEnabled
+    local char = player.Character
+    if not char then return end
+    local humanoid = char:FindFirstChild("Humanoid")
+    if not humanoid then return end
+    
+    if speedEnabled then
+        speedButton.Text = "✅ SpeedyMode"
+        speedButton.BackgroundColor3 = Color3.fromRGB(0, 255, 200)
+        originalWalkSpeed = humanoid.WalkSpeed
+        humanoid.WalkSpeed = 150
+    else
+        speedButton.Text = "SpeedyMode"
+        speedButton.BackgroundColor3 = Color3.fromRGB(200, 100, 255)
+        humanoid.WalkSpeed = originalWalkSpeed
+    end
+end
+
+speedButton.MouseButton1Click:Connect(toggleSpeed)
+
+player.CharacterAdded:Connect(function(char)
+    if speedEnabled then
+        task.wait(0.5)
+        local humanoid = char:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = 150
+        end
+    end
+end)
+
+-- =====================================================
+-- ============ FEATURE: SPINNY HECK MODE =============
+-- =====================================================
+local spinning = false
+local spinConnection = nil
+
+local function toggleSpin()
+    spinning = not spinning
+    local char = player.Character
+    if not char then return end
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+    
+    if spinning then
+        spinButton.Text = "🔄 spinny heck mode ON"
+        spinButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+        if spinConnection then spinConnection:Disconnect() end
+        spinConnection = runService.RenderStepped:Connect(function()
+            if not spinning or not root then return end
+            root.CFrame = root.CFrame * CFrame.Angles(0, math.rad(10), 0)
+        end)
+    else
+        spinButton.Text = "spinny heck mode"
+        spinButton.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
+        if spinConnection then
+            spinConnection:Disconnect()
+            spinConnection = nil
+        end
+    end
+end
+
+spinButton.MouseButton1Click:Connect(toggleSpin)
+
+player.CharacterAdded:Connect(function()
+    if spinning then
+        spinning = false
+        if spinConnection then
+            spinConnection:Disconnect()
+            spinConnection = nil
+        end
+        spinButton.Text = "spinny heck mode"
+        spinButton.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
+    end
+end)
+
+-- ============ LOAD COMPLETE ============
+print("✅ Brick Heck FE Bypass Hub loaded successfully!")
+print("✅ Features: ESP | Aimbot | Fly | Speed | Spin")
+print("✅ All buttons toggleable | GUI movable")
